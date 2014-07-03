@@ -13,5 +13,7 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	echo 'yea';
 });
+
+Route::resource('ducks', 'DuckController');
