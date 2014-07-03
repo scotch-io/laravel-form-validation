@@ -48,8 +48,8 @@ class HomeController extends BaseController {
 			// redirect our user back with error messages
 			// also redirect them back with old inputs so they dont have to fill out the form again
 			// but we wont redirect them with the password they entered
-
 			
+
 		}
 		else
 		{

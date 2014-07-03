@@ -14,6 +14,7 @@
 Route::get('/', function()
 {
 	echo 'yea';
+	var_dump(gethostname());
 });
 
 Route::resource('ducks', 'DuckController');

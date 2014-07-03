@@ -15,6 +15,12 @@ class CreateDucksTable extends Migration {
 		Schema::create('ducks', function(Blueprint $table)
 		{
 			$table->increments('id');
+
+			$table->string('name');
+			$table->string('email');
+			$table->integer('feathers');
+			$table->string('password');
+			
 			$table->timestamps();
 		});
 	}
