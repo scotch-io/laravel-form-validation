@@ -13,7 +13,7 @@
 
 Route::get('/', function()
 {
-	echo 'yea';
+	return View::make('hello');
 });
 
 // route to show the duck form
