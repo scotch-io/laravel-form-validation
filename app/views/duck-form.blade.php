@@ -16,9 +16,9 @@
 		
 		<div class="page-header">
 			<h1><span class="glyphicon glyphicon-flash"></span> Ducks Fly!</h1>
-		</div>
+		</div>	
 
-		@if ($errors->has('name'))
+		@if ($errors->has())
 		<div class="alert alert-danger">
 			@foreach ($errors->all() as $error)
 				{{ $error }}<br>		
@@ -27,25 +27,27 @@
 		@endif
 
 		<!-- FORM STARTS HERE -->
-		{{ Form::open(array('url' => 'ducks', 'novalidate' => '')) }}
+		{{ Form::open(array('url' => 'ducks')) }}
 
 			<!-- token provided by laravel to prevent csrf -->
 			{{ Form::token() }}
 
 			<div class="form-group @if ($errors->has('name')) has-error @endif">
 				<label for="name">Name</label>
-				<input type="text" id="name" class="form-control" name="name" value="{{ Input::old('name') }}">
+				{{ Form::text('name', Input::old('name'), array('placeholder' => 'Messi', 'class' => 'form-control')) }}
 				@if ($errors->has('name')) <p class="help-block">{{ $errors->first('name') }}</p> @endif
 			</div>
 
 			<div class="form-group @if ($errors->has('email')) has-error @endif">
 				<label for="email">Email</label>
 				<input type="text" id="email" class="form-control" name="email">
+				@if ($errors->has('email')) <p class="help-block">{{ $errors->first('email') }}</p> @endif
 			</div>
 
 			<div class="form-group @if ($errors->has('feathers')) has-error @endif">
 				<label for="feathers">Feathers</label>
 				<input type="number" id="feathers" class="form-control" name="feathers">
+				@if ($errors->has('feathers')) <p class="help-block">{{ $errors->first('feathers') }}</p> @endif
 			</div>
 
 			<div class="form-group @if ($errors->has('password')) has-error @endif">

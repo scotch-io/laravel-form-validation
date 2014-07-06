@@ -47,8 +47,10 @@ Route::post('ducks', array('before' => 'csrf', function()
 		// also redirect them back with old inputs so they dont have to fill out the form again
 		// but we wont redirect them with the password they entered
 		$messages = $validator->messages();
-		var_dump($messages);
-		return View::make('duck-form')->withErrors($validator)->withInput(Input::except('password', 'password_confirm'));
+
+		return Redirect::to('ducks')
+			->withErrors($validator)
+			->withInput(Input::except('password', 'password_confirm'));
 
 	}
 	else
