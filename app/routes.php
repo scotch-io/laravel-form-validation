@@ -22,14 +22,14 @@ Route::get('ducks', function()
 	return View::make('duck-form');
 });
 
-// route to €
+// route to process the ducks form
 Route::post('ducks', array('before' => 'csrf', function()
 {
 	// create the validation rules ------------------------
 	$rules = array(
-		'name'             => 'required', 					// just a normal required validation
+		'name'             => 'required', 				// just a normal required validation
 		'email'            => 'required|unique:ducks', 	// required and must be unique in the ducks table
-		'feathers'         => 'integer', 		// required and must be a solid number (decimals use numeric)
+		'feathers'         => 'integer', 				// required and must be a solid number (decimals use numeric)
 		'password'         => 'required',
 		'password_confirm' => 'required|same:password' 	// required and has to match the password field
 	);
@@ -73,7 +73,8 @@ Route::post('ducks', array('before' => 'csrf', function()
 
 		// redirect ----------------------------------------
 		// redirect our user back to the form so they can do it all over again
-		return Redirect::to('ducks');
+		return Redirect::to('ducks')
+			->with('message', 'Hooray!');
 
 	}
 

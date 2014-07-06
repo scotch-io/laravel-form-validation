@@ -27,37 +27,39 @@
 		@endif
 
 		<!-- FORM STARTS HERE -->
-		{{ Form::open(array('url' => 'ducks')) }}
+		<form method="POST" action="/ducks" novalidate>
 
 			<!-- token provided by laravel to prevent csrf -->
 			{{ Form::token() }}
 
 			<div class="form-group @if ($errors->has('name')) has-error @endif">
 				<label for="name">Name</label>
-				{{ Form::text('name', Input::old('name'), array('placeholder' => 'Messi', 'class' => 'form-control')) }}
+				<input type="text" id="name" class="form-control" name="name" placeholder="Lionel Messi" value="{{ Input::old('name') }}">
 				@if ($errors->has('name')) <p class="help-block">{{ $errors->first('name') }}</p> @endif
 			</div>
 
 			<div class="form-group @if ($errors->has('email')) has-error @endif">
 				<label for="email">Email</label>
-				<input type="text" id="email" class="form-control" name="email">
+				<input type="text" id="email" class="form-control" name="email" placeholder="socc3rfan@argentina.com" value="{{ Input::old('email') }}">
 				@if ($errors->has('email')) <p class="help-block">{{ $errors->first('email') }}</p> @endif
 			</div>
 
 			<div class="form-group @if ($errors->has('feathers')) has-error @endif">
 				<label for="feathers">Feathers</label>
-				<input type="number" id="feathers" class="form-control" name="feathers">
+				<input type="number" id="feathers" class="form-control" name="feathers" placeholder="35" value="{{ Input::old('feathers') }}">
 				@if ($errors->has('feathers')) <p class="help-block">{{ $errors->first('feathers') }}</p> @endif
 			</div>
 
 			<div class="form-group @if ($errors->has('password')) has-error @endif">
 				<label for="password">Password</label>
 				<input type="password" id="password" class="form-control" name="password">
+				@if ($errors->has('password')) <p class="help-block">{{ $errors->first('password') }}</p> @endif
 			</div>
 
 			<div class="form-group @if ($errors->has('password_confirm')) has-error @endif">
 				<label for="password_confirm">Confirm Password</label>
 				<input type="password" id="password_confirm" class="form-control" name="password_confirm">
+				@if ($errors->has('password_confirm')) <p class="help-block">{{ $errors->first('password_confirm') }}</p> @endif
 			</div>
 
 			<div class="form-group">
