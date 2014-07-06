@@ -25,13 +25,16 @@ Route::get('ducks', function()
 // route to process the ducks form
 Route::post('ducks', array('before' => 'csrf', function()
 {
+	print_r(Input::get('name'));
+	print_r(Input::get('feathers'));
+
 	// create the validation rules ------------------------
 	$rules = array(
-		'name'             => 'required', 				// just a normal required validation
-		'email'            => 'required|unique:ducks', 	// required and must be unique in the ducks table
-		'feathers'         => 'integer', 				// required and must be a solid number (decimals use numeric)
+		'name'             => 'required', 						// just a normal required validation
+		'email'            => 'required|email|unique:ducks', 	// required and must be unique in the ducks table
+		'feathers'         => 'number', 						// required and must be a solid number (decimals use numeric)
 		'password'         => 'required',
-		'password_confirm' => 'required|same:password' 	// required and has to match the password field
+		'password_confirm' => 'required|same:password' 			// required and has to match the password field
 	);
 
 	// do the validation ----------------------------------
@@ -50,7 +53,8 @@ Route::post('ducks', array('before' => 'csrf', function()
 
 		return Redirect::to('ducks')
 			->withErrors($validator)
-			->withInput(Input::except('password', 'password_confirm'));
+			->withInput(Input::except('password', 'password_confirm'))
+			->with('feathers', Input::get('feathers'));
 
 	}
 	else
