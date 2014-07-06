@@ -25,21 +25,23 @@ Route::get('ducks', function()
 // route to process the ducks form
 Route::post('ducks', array('before' => 'csrf', function()
 {
-	print_r(Input::get('name'));
-	print_r(Input::get('feathers'));
 
 	// create the validation rules ------------------------
 	$rules = array(
 		'name'             => 'required', 						// just a normal required validation
 		'email'            => 'required|email|unique:ducks', 	// required and must be unique in the ducks table
-		'feathers'         => 'number', 						// required and must be a solid number (decimals use numeric)
 		'password'         => 'required',
 		'password_confirm' => 'required|same:password' 			// required and has to match the password field
 	);
 
+	// create custom validation messages ------------------
+	$messages = array(
+		'same' 	=> 'The :others must match.'
+	);
+
 	// do the validation ----------------------------------
 	// validate against the inputs from our form
-	$validator = Validator::make(Input::all(), $rules);
+	$validator = Validator::make(Input::all(), $rules, $messages);
 
 	// check if the validator failed -----------------------
 	if ($validator->fails())
@@ -53,8 +55,7 @@ Route::post('ducks', array('before' => 'csrf', function()
 
 		return Redirect::to('ducks')
 			->withErrors($validator)
-			->withInput(Input::except('password', 'password_confirm'))
-			->with('feathers', Input::get('feathers'));
+			->withInput(Input::except('password', 'password_confirm'));
 
 	}
 	else
@@ -65,12 +66,10 @@ Route::post('ducks', array('before' => 'csrf', function()
 		// let him enter the database
 
 		// create the data for our duck
-		$duckData = array(
-			'name'     => Input::get('name'),
-			'email'    => Input::get('email'),
-			'feathers' => Input::get('feathers'),
-			'password' => Hash::make(Input::get('password'))
-		);
+		$duck = new Duck;
+		$duck->name     = Input::get('name');
+		$duck->email    = Input::get('email');
+		$duck->password = Hash::make(Input::get('password'));
 
 		// save our duck
 		$duck->save();
@@ -78,7 +77,7 @@ Route::post('ducks', array('before' => 'csrf', function()
 		// redirect ----------------------------------------
 		// redirect our user back to the form so they can do it all over again
 		return Redirect::to('ducks')
-			->with('message', 'Hooray!');
+			->with('messages', 'Hooray!');
 
 	}
 

@@ -6,7 +6,7 @@
 	<!-- load bootstrap -->
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<style>
-		body 	{ padding-top:40px; }
+		body 	{ padding-bottom:40px; padding-top:40px; }
 	</style>
 </head>
 <body class="container">
@@ -17,6 +17,10 @@
 		<div class="page-header">
 			<h1><span class="glyphicon glyphicon-flash"></span> Ducks Fly!</h1>
 		</div>	
+
+		@if (isset($messages))
+			{{{ $messages }}}
+		@endif
 
 		@if ($errors->has())
 		<div class="alert alert-danger">
@@ -42,12 +46,6 @@
 				<label for="email">Email</label>
 				<input type="text" id="email" class="form-control" name="email" placeholder="socc3rfan@argentina.com" value="{{ Input::old('email') }}">
 				@if ($errors->has('email')) <p class="help-block">{{ $errors->first('email') }}</p> @endif
-			</div>
-
-			<div class="form-group @if ($errors->has('feathers')) has-error @endif">
-				<label for="feathers">Feathers</label>
-				<input type="number" id="feathers" class="form-control" name="feathers" placeholder="35" value="{{ Input::old('feathers') }}">
-				@if ($errors->has('feathers')) <p class="help-block">{{ $errors->first('feathers') }}</p> @endif
 			</div>
 
 			<div class="form-group @if ($errors->has('password')) has-error @endif">
