@@ -16,11 +16,7 @@
 		
 		<div class="page-header">
 			<h1><span class="glyphicon glyphicon-flash"></span> Ducks Fly!</h1>
-		</div>	
-
-		@if (isset($messages))
-			{{{ $messages }}}
-		@endif
+		</div>
 
 		@if ($errors->has())
 		<div class="alert alert-danger">
@@ -38,13 +34,13 @@
 
 			<div class="form-group @if ($errors->has('name')) has-error @endif">
 				<label for="name">Name</label>
-				<input type="text" id="name" class="form-control" name="name" placeholder="Lionel Messi" value="{{ Input::old('name') }}">
+				<input type="text" id="name" class="form-control" name="name" placeholder="Somebody Awesome" value="{{ Input::old('name') }}">
 				@if ($errors->has('name')) <p class="help-block">{{ $errors->first('name') }}</p> @endif
 			</div>
 
 			<div class="form-group @if ($errors->has('email')) has-error @endif">
 				<label for="email">Email</label>
-				<input type="text" id="email" class="form-control" name="email" placeholder="socc3rfan@argentina.com" value="{{ Input::old('email') }}">
+				<input type="text" id="email" class="form-control" name="email" placeholder="super@cool.com" value="{{ Input::old('email') }}">
 				@if ($errors->has('email')) <p class="help-block">{{ $errors->first('email') }}</p> @endif
 			</div>
 
@@ -60,9 +56,7 @@
 				@if ($errors->has('password_confirm')) <p class="help-block">{{ $errors->first('password_confirm') }}</p> @endif
 			</div>
 
-			<div class="form-group">
-				<button type="submit" class="btn btn-success">Go Ducks Go!</button>
-			</div>
+			<button type="submit" class="btn btn-success">Go Ducks Go!</button>
 
 		</form>
 
