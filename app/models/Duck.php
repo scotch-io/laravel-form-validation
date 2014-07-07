@@ -2,6 +2,6 @@
 
 class Duck extends Eloquent {
 
-	protected $fillable = array('name', 'email', 'feathers', 'password');
+	protected $fillable = array('name', 'email', 'password');
 
 }

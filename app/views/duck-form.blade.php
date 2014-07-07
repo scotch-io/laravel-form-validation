@@ -28,10 +28,7 @@
 
 		<!-- FORM STARTS HERE -->
 		<form method="POST" action="/ducks" novalidate>
-
-			<!-- token provided by laravel to prevent csrf -->
-			{{ Form::token() }}
-
+		
 			<div class="form-group @if ($errors->has('name')) has-error @endif">
 				<label for="name">Name</label>
 				<input type="text" id="name" class="form-control" name="name" placeholder="Somebody Awesome" value="{{ Input::old('name') }}">

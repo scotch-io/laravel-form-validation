@@ -36,6 +36,7 @@ Route::post('ducks', array('before' => 'csrf', function()
 
 	// create custom validation messages ------------------
 	$messages = array(
+		'required' => 'The :attribute is really really really important.',
 		'same' 	=> 'The :others must match.'
 	);
 
@@ -44,22 +45,18 @@ Route::post('ducks', array('before' => 'csrf', function()
 	$validator = Validator::make(Input::all(), $rules, $messages);
 
 	// check if the validator failed -----------------------
-	if ($validator->fails())
-	{
-		// create custom error messages
+	if ($validator->fails()) {
+		// redirect our user back with error messages		
+		$messages = $validator->messages();
 
-		// redirect our user back with error messages
 		// also redirect them back with old inputs so they dont have to fill out the form again
 		// but we wont redirect them with the password they entered
-		$messages = $validator->messages();
 
 		return Redirect::to('ducks')
 			->withErrors($validator)
 			->withInput(Input::except('password', 'password_confirm'));
 
-	}
-	else
-	{
+	} else {
 		// validation successful ---------------------------
 
 		// our duck has passed all tests!
